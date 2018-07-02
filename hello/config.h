@@ -20,6 +20,7 @@ bool haveFile = false;
 string choice;
 string userSet[11];
 
+
 class user{
 private:
     string username;
@@ -28,7 +29,7 @@ private:
     bool canMoAu;
 public:
     void CreateUsr(string usrnm,string pswd,string auth);
-    void deleteUsr();
+    void deleteUsr(string del);
     void setPasswd(string pswd);
     void setUsrname(string usrnm);
     void setAuthority(string auth);
@@ -36,7 +37,7 @@ public:
     string getUsrPswd();
     string getUsrname();
     string getUsrAuth();
-
+    
 };
 
 
@@ -58,7 +59,7 @@ struct node{
 const string commands[] = {
     "ls","cd","ll","clear","chmod","pwd",
     "useradd","cat","vim","touch",
-    "su","exit","rm","mkdir"
+    "su","exit","rm","mkdir","rmuser"
 };
 
 void passwd();
@@ -95,26 +96,29 @@ void changeAuth(node *head, string x, string flag);
 bool ckAuth(node *head, const string &x, int flag);
 string getCurnt_Auth();
 void createRootDir();
+string getCurrentTimeStr();
+void rmuser();
 
 const string menu_msg[] ={
-" \t\t*****************************************************************************\n"
-" \t\t*                           Commands Are Here                               *\n"
-" \t\t*****************************************************************************\n"
-" \t\t*                                ls                                         *\n"
-" \t\t*                                ll                                         *\n"
-" \t\t*                                cd                                         *\n"
-" \t\t*                                chmod                                      *\n"
-" \t\t*                                pwd                                        *\n"
-" \t\t*                                useradd                                    *\n"
-" \t\t*                                passwd                                     *\n"
-" \t\t*                                cat                                        *\n"
-" \t\t*                                vim                                        *\n"
-" \t\t*                                touch                                      *\n"
-" \t\t*                                su                                         *\n"
-" \t\t*                                exit                                       *\n"
-" \t\t*                                rm                                         *\n"
-" \t\t*                                mkdir                                      *\n"
-" \t\t*****************************************************************************\n"
+    " \t\t*****************************************************************************\n"
+    " \t\t*                           Commands Are Here                               *\n"
+    " \t\t*****************************************************************************\n"
+    " \t\t*                                ls                                         *\n"
+    " \t\t*                                ll                                         *\n"
+    " \t\t*                                cd                                         *\n"
+    " \t\t*                                chmod                                      *\n"
+    " \t\t*                                pwd                                        *\n"
+    " \t\t*                                useradd                                    *\n"
+    " \t\t*                                passwd                                     *\n"
+    " \t\t*                                cat                                        *\n"
+    " \t\t*                                vim                                        *\n"
+    " \t\t*                                touch                                      *\n"
+    " \t\t*                                su                                         *\n"
+    " \t\t*                                exit                                       *\n"
+    " \t\t*                                rm                                         *\n"
+    " \t\t*                                rmuser                                     *\n"
+    " \t\t*                                mkdir                                      *\n"
+    " \t\t*****************************************************************************\n"
 };
 
 

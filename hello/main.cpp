@@ -1,7 +1,7 @@
 #include "config.h"
-/**
+/*
  author: JoyChenCN
- github: https://github.com/JoyChen1998/
+ github: https://github.com/JoyChen1998
  */
 #define stringlen(x) sizeof(x)/sizeof(x[0])
 #define for0(x, n) for(int x = 0 ; x < n ; x++)
@@ -88,8 +88,12 @@ void user::changePasswd() {
     cout << endl;
 }
 
-void user::deleteUsr() {
-
+void user::deleteUsr(string del) {
+    for_str1(i,stringlen(userSet)){
+        if(userSet[i] == del){
+            userSet[i] = "";
+        }
+    }
 }
 
 void createUser(int w) {
@@ -107,10 +111,13 @@ void createUser(int w) {
         cout << TAB << "Please Input Your Username" << endl;
         while (true) {
             int i = 0;
+            cout << TAB;
             cin >> usrname;
+            getchar();
             for (i = 0; i < stringlen(userSet); i++) {
                 if (userSet[i] == usrname) {
                     cout << "This Account Has Already Existed! Please Try Another" << endl;
+                    return;
                 }
             }
             if (i == stringlen(userSet)) {
@@ -120,7 +127,7 @@ void createUser(int w) {
     }
     cout << endl;
     cout << TAB << "Please Input Your Password Twice" << endl;
-//    getchar();
+    //    getchar();
     while (true) {
         char pswd[20];
         cout << TAB;
@@ -135,7 +142,12 @@ void createUser(int w) {
         cout << TAB << "Error: The code you enter twice must be the same and not be null. Try Again!" << endl;
     }
     user[w].CreateUsr(usrname, passwrd, auth);
-    userSet[w] = user[w].getUsrname();
+    for(int i = 0 ; i < 10; i++){
+        if(userSet[i] == ""){
+            userSet[i] = user[w].getUsrname();
+            break;
+        }
+    }
     if(w == 0){
         for (int i = 3; i > 0; i--) {
             cout << TAB << TAB << "After " << i << " Seconds To Enter The System" << endl;
@@ -303,7 +315,7 @@ node *removeNode(node *head, string x) {
         if (pNode->next != nullptr && pNode->next->name == x) {
             deleteNode = pNode->next;
             pNode->next = pNode->next->next;
-//            pNode->next->pre = pNode;
+            //            pNode->next->pre = pNode;
         }
     }
     if (deleteNode != nullptr) {
@@ -317,7 +329,7 @@ void catNode(node *head, string x) {
     node *pNode = head;
     if (pNode == nullptr)
         return;
-
+    
     else {
         cout << TAB;
         while (pNode->next != nullptr) {
@@ -410,7 +422,7 @@ void showNodeList(node *head, int flag) {
     } else {
         if (flag) {
             while (pNode->next != nullptr) {
-
+                
                 int maxSize = (int) pNode->content.size() > pNode->fsize ? (int) pNode->content.size() : pNode->fsize;
                 printf("\t\t%5s %5s %6dB %12s %7s\n", auth_digit_to_alpha(pNode->auth).data(), pNode->owner.data(),
                        maxSize, pNode->lastOpTime.data(), pNode->name.data());
@@ -427,7 +439,7 @@ void showNodeList(node *head, int flag) {
             printf("\t\t%s\n", pNode->name.data());
         }
     }
-//    getchar();
+    //    getchar();
 }
 
 string getCurnt_Auth() {
@@ -459,7 +471,7 @@ bool ckAuth(node *head, const string &x, int flag) {
                     return true;
                 if ((authority_x >= '6' || authority_pNode >= '6') && flag == 0)   // flag = 0   write
                     return true;
-
+                
             }
             pNode = pNode->next;
         }
@@ -530,7 +542,7 @@ bool ModifyFile(node *head, const string &x) {
             getchar();
             return true;
         }
-
+        
     }
     return false;
 }
@@ -568,6 +580,8 @@ void run() {
             vim(x);
         } else if (choice.find("touch") != string::npos) {
             touch(x);
+        } else if (choice.find("rmuser") != string::npos && choice.size() == 6) {
+            rmuser();
         } else if (choice.find("su") != string::npos) {
             su(x);
         } else if (choice.find("exit") != string::npos && choice.size() == 4) {
@@ -600,7 +614,7 @@ void greet_msg() {
     cout << "\t\t  Hi Guys ! This Is A Light-weight File System That Models Linux Made By JoyChan!" << endl;
     cout << "\t\t***********************************************************************************" << endl;
     cout << endl;
-    cout << "@Github: https://github.com/JoyChen1998" <<endl;
+    cout << TAB<<"@Github: https://github.com/JoyChen1998" <<endl;
 }
 
 void createRootDir() {
@@ -626,7 +640,7 @@ void createRootDir() {
     curnt_path[0] = head->name;
     curnt_path[1] = head->innerp->name;
     curnt_path[2] = head->innerp->innerp->name;
-
+    
 }
 
 void init() {
@@ -649,7 +663,7 @@ void vim(string filename) {
         } else {
             dirGo = insertNode(dirGo, filename, 0);
         }
-//        showNodeList(head, 1);
+        //        showNodeList(head, 1);
     }
 }
 
@@ -664,7 +678,7 @@ void touch(string filename) {
         } else {
             dirGo = insertNode(dirGo, filename, 1);
         }
-//        showNodeList(head, 0);
+        //        showNodeList(head, 0);
     }
 }
 
@@ -703,10 +717,10 @@ void su(string x) {
             }
         }
         if (i == stringlen(userSet)) {
-            cout << "this user does not exist" << endl;
+            cout <<TAB << "this user does not exist" << endl;
             return;
         }
-
+        
     }
 }
 
@@ -731,19 +745,38 @@ void passwd() {
     }
 }
 
+void rmuser(){
+    if(curnt_user != "root"){
+        cout<<"Permission denied!"<<endl;
+        return;
+    }
+    user_cnt--;
+    cout<<TAB<<"Please input the username TO DELETE"<<endl;
+    string userdel;
+    cout<<TAB;
+    cin>>userdel;
+    
+    for0(i, stringlen(userSet)){
+        if(userSet[i] == userdel){
+            user[0].deleteUsr(userdel);
+        }
+    }
+    getchar();
+}
+
 void mkdir(string dirname) {
     if (dirname.empty()) {
         cout << "No DirName" << endl;
         getchar();
         return;
     }
-
+    
     if (!haveFile || !init_finish) {
         createNode_dir(dirGo, dirname);
     } else {
         insertNode_dir(dirGo, dirname);
     }
-//    showNodeList(head, 0);
+    //    showNodeList(head, 0);
 }
 
 void exit() {
@@ -767,12 +800,15 @@ void pwd() {
 
 void useradd() {
     user_cnt++;
-    createUser(user_cnt);
+    if(user_cnt < 10)
+        createUser(user_cnt);
+    else
+        cout<<TAB <<" Error: user_list is full!"<<endl;
 }
 
 void cat(string fileName) {
     catNode(dirGo, std::move(fileName));
-
+    
 }
 
 void chmod(string filename) {
