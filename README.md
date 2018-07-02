@@ -5,7 +5,6 @@ My OS project About Light-weight File System
 + *C++ 11 Standard*
 
 ## Funtions
--------------------------------------
 ### Users
   + Create User
   + Delete User
@@ -18,6 +17,5 @@ My OS project About Light-weight File System
   + Modify FIle
   + Chmod Authority
   + Delete FIle
--------------------------------------
 
-##*Welcome to correct it.*
+*Welcome to correct it.*
