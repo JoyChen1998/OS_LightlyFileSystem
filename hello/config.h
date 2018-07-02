@@ -94,7 +94,7 @@ void run();
 void changeAuth(node *head, string x, string flag);
 bool ckAuth(node *head, const string &x, int flag);
 string getCurnt_Auth();
-
+void createRootDir();
 
 const string menu_msg[] ={
 " \t\t*****************************************************************************\n"

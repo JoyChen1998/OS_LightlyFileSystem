@@ -1,5 +1,8 @@
 #include "config.h"
-
+/**
+ author: JoyChenCN
+ github: https://github.com/JoyChen1998/
+ */
 #define stringlen(x) sizeof(x)/sizeof(x[0])
 #define for0(x, n) for(int x = 0 ; x < n ; x++)
 #define for1(x, n) for(int x = 1 ; x < n ; x++)
@@ -133,12 +136,12 @@ void createUser(int w) {
     }
     user[w].CreateUsr(usrname, passwrd, auth);
     userSet[w] = user[w].getUsrname();
-//    if(w == 0){
-//        for (int i = 3; i > 0; i--) {
-//            cout << TAB << TAB << "After " << i << " Seconds To Enter The System" << endl;
-//            sleep(1);
-//        }
-//    }
+    if(w == 0){
+        for (int i = 3; i > 0; i--) {
+            cout << TAB << TAB << "After " << i << " Seconds To Enter The System" << endl;
+            sleep(1);
+        }
+    }
 }
 
 void menu() {
@@ -596,8 +599,8 @@ void greet_msg() {
     cout << "\t\t***********************************************************************************" << endl;
     cout << "\t\t  Hi Guys ! This Is A Light-weight File System That Models Linux Made By JoyChan!" << endl;
     cout << "\t\t***********************************************************************************" << endl;
-//    cout << endl;
-//    cout << "@Github: https://github.com/JoyChen1998" <<endl;
+    cout << endl;
+    cout << "@Github: https://github.com/JoyChen1998" <<endl;
 }
 
 void createRootDir() {
@@ -836,7 +839,7 @@ void ll() {
 
 int main() {
     init();
-//    menu();
+    menu();
     run();
     return 0;
 }
